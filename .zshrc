@@ -113,13 +113,6 @@ eval "$(zoxide init --cmd cd zsh)"
  alias lla='eza -la --color=always --group-directories-first --icons'  # long format
  alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
  alias l.="eza -a | grep -e '^\.'"          
- #for restoring tmux session after reboot 
- 
- # alias mux='pgrep -vx tmux > /dev/null && \
-	# 	tmux new -d -s delete-me && \
-	# 	tmux run-shell ~/.tmux/plugins/tmux-resurrect/scripts/restore.sh && \
-	# 	tmux kill-session -t delete-me && \
-	# 	tmux attach '
-
 alias a='tmux attach -t '
 alias sleep='systemctl suspend'
+bindkey -s ^p "~/.local/bin/tmux-sessionizer\n"
