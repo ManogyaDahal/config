@@ -115,4 +115,4 @@ eval "$(zoxide init --cmd cd zsh)"
  alias l.="eza -a | grep -e '^\.'"          
 alias a='tmux attach -t '
 alias sleep='systemctl suspend'
-bindkey -s ^p "~/.local/bin/tmux-sessionizer\n"
+bindkey -s ^p "~/.local/bin/tmux-sessionizer.sh\n"
