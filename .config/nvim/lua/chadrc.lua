@@ -4,13 +4,13 @@
 local options = {
 
   base46 = {
-    theme = "rosepine", -- default theme
+    theme = "everforest", -- default theme
     hl_add = {},
     hl_override = {},
     integrations = {},
     changed_themes = {},
     transparency = true,
-    theme_toggle = { "rosepine", "one_light" },
+    theme_toggle = { "everforest", "one_light" },
   },
 
   ui = {

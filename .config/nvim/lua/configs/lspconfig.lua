@@ -32,6 +32,7 @@ local servers = {
   "yamlls",
   "tailwindcss",
   "asm_lsp",
+  "tinymist"
 }
 
 vim.lsp.enable(servers)

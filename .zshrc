@@ -76,9 +76,6 @@ plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Use colors for less, man, etc.
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
@@ -113,6 +110,5 @@ eval "$(zoxide init --cmd cd zsh)"
  alias lla='eza -la --color=always --group-directories-first --icons'  # long format
  alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
  alias l.="eza -a | grep -e '^\.'"          
-alias a='tmux attach -t '
-alias sleep='systemctl suspend'
-bindkey -s ^p "~/.local/bin/tmux-sessionizer.sh\n"
+ alias sleep='systemctl suspend'
+ bindkey -s ^p "~/.local/bin/tmux-sessionizer.sh\n"

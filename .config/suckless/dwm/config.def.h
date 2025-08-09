@@ -43,7 +43,7 @@ static const Rule rules[] = {
    {"firefox",       NULL,       NULL,         1 << 3,         0,           -1},
    {"TelegramDesktop", NULL,       NULL,         1 << 2,         0,           -1 },
    {"discord",         NULL,       NULL,         1 << 2,         0,           -1 },
-   // {"thunderbird",  NULL,       NULL,       1 <<6  ,      0,           -1 },
+   {"com.github.th_ch.youtube_music",         NULL,       NULL,         1 << 1,         0,           -1 },
 };
 
 /* layout(s) */
