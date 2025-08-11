@@ -1,4 +1,4 @@
----------Vim Options-----------
+--------------------------------Nvim Options ----------------------------------
 vim.o.clipboard = "unnamedplus"
 vim.o.hlsearch = false
 vim.o.tabstop = 2
@@ -17,24 +17,30 @@ vim.o.incsearch = true
 vim.o.undofile = true
 vim.opt.colorcolumn = "80"
 
--------Vim Keybinds----------
+--------------------------------Nvim keybinds ---------------------------------
 vim.g.mapleader = " "
 
 vim.keymap.set('n', '<leader>so', ':update<CR> :source<CR>')
 vim.keymap.set('n', '<leader>w', ':write<CR>')
 vim.keymap.set('n', '<leader>x', ':quit<CR>')
+vim.keymap.set({ 'n', 'v', 'x' }, '<leader>v', ':e $MYVIMRC<CR>') --Look into this
+vim.keymap.set({ 'n', 'v', 'x' }, '<leader>s', ':e #<CR>')        --Look into this
+vim.keymap.set({ 'n', 'v', 'x' }, '<leader>S', ':sf #<CR>')       --Look into this
 
+--Mini pick
 vim.keymap.set('n', '<leader>ff', ':Pick files<CR>')
 vim.keymap.set('n', '<leader>fw', ':Pick grep_live<CR>')
 vim.keymap.set('n', '<leader>h', ':Pick help<CR>')
+
+--lsp
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap = true, silent = true })
+
+--Nvim tree
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { noremap = true, silent = true })
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>v', ':e $MYVIMRC<CR>') --Look into this
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>s', ':e #<CR>')--Look into this
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>S', ':sf #<CR>')--Look into this
-
------------Vim Plugins----------------
+--------------------------------Nvim Packages ---------------------------------
 vim.pack.add({
 	{ src = "https://github.com/vague2k/vague.nvim" },
 	{ src = "https://github.com/echasnovski/mini.pick" },
@@ -44,12 +50,56 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/akinsho/toggleterm.nvim" },
+	{ src = "https://github.com/mbbill/undotree" },
 })
 
-require("nvim-web-devicons").setup()
+-----------------------Package with Defaults-----------------------------------
+require("nvim-web-devicons").setup({})
 require("stay-centered").setup({})
-require("mini.pick").setup({})
 require("mason").setup({})
+require("mini.pick").setup({})
+
+---------------------------------Toggle Term ----------------------------------
+require("toggleterm").setup({
+	shade_terminals = false,
+	start_in_insert = true,
+	persist_size = false,
+	float_opts = {
+		border = 'curved'
+	}
+})
+
+local Terminal = require("toggleterm.terminal").Terminal
+local float_term = Terminal:new({ direction = "float" })
+function _FLOAT_TOGGLE()
+	float_term:toggle()
+end
+
+local horiz_term = Terminal:new({ direction = "horizontal", size = 15 })
+function _HORIZ_TOGGLE()
+	horiz_term:toggle()
+end
+
+local verti_term = Terminal:new({ direction = "vertical", size = 55 })
+function _VERT_TOGGLE()
+	verti_term:toggle()
+end
+
+vim.keymap.set({ "n", "t" }, "<A-i>", _FLOAT_TOGGLE, { noremap = true, silent = true })
+vim.keymap.set({ "n", "t" }, "<A-h>", _HORIZ_TOGGLE, { noremap = true, silent = true })
+vim.keymap.set({ "n", "t" }, "<A-v>", _VERT_TOGGLE, { noremap = true, silent = true })
+
+-- This is for the navigation in terminal
+function _G.set_terminal_keymaps()
+	vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { buffer = 0 })
+	vim.keymap.set('t', 'jk', [[<C-\><C-n>]], { buffer = 0 })
+end
+
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
+----------------------------Nvim Tree------------------------------------------
 require('nvim-tree').setup({
 	update_focused_file = {
 		enable = true,
@@ -61,10 +111,12 @@ require('nvim-tree').setup({
 	},
 	actions = {
 		open_file = {
-			quit_on_open = true, -- auto close tree on file open
+			quit_on_open = true,
 		},
 	},
 })
+
+---------------------Color Scheme and Transparency-----------------------------
 vim.cmd("colorscheme vague")
 vim.cmd(":hi statusline guibg=NONE")
 vim.cmd [[
@@ -74,11 +126,10 @@ vim.cmd [[
   highlight NonText ctermbg=none
 ]]
 
---lsp
+--------------------------lsp -------------------------------------------------
 vim.lsp.enable({ "lua_ls", "clang" })
-vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 
 
---snippets
+-----------------------------Snippets------------------------------------------
 require("luasnip").setup({ enable_autosnippets = true })
 require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
