@@ -40,15 +40,18 @@ require("stay-centered").setup({})
 require("mason").setup({})
 require("mini.pairs").setup({})
 require("mini.completion").setup({})
+require("mini.comment").setup({})
+local func = require("func")
 require("mini.pick").setup({
   mappings = {
-    move_down  = '<Tab>',
-    move_up    = '<S-Tab>',
-    toggle_info    = '<C-i>',
-    toggle_preview = '<C-p>',
-}
+    move_up = '<S-Tab>',
+    move_down = '<Tab>',
+    toggle_info = '<C-t>',
+	toggle_preview = '<C-p>',
+  },
 })
-local func = require("func")
+
+require("undotree").setup({})
 
 ---------------------------------Toggle Term ----------------------------------
 require("toggleterm").setup({
@@ -104,8 +107,9 @@ vim.cmd [[
 --------------------------lsp -------------------------------------------------
 vim.lsp.enable({
 	"lua_ls",
-	"clang",
+	"clangd",
 	"gopls",
+	"rust_analyzer",
 })
 
 ----------------------------------Tree Sitter----------------------------------
@@ -134,8 +138,7 @@ vim.keymap.set({ 'n', 'v', 'x' }, '<leader>S', ':sf #<CR>')       --Look into th
 
 --Mini pick
 vim.keymap.set('n', '<leader>ff', ':Pick files<CR>')
-vim.keymap.set('n', '<leader>vs', ':<CR>')
-vim.keymap.set('n', '<leader>vs', ':Pick buffers<CR>')
+vim.keymap.set('n', '<leader>lb', ':Pick buffers<CR>')
 vim.keymap.set('n', '<leader>fw', ':Pick grep_live<CR>')
 vim.keymap.set('n', '<leader>h', ':Pick help<CR>')
 
@@ -156,11 +159,9 @@ vim.keymap.set({ "n", "t" }, "<A-i>", func.float_toggle, { noremap = true, silen
 vim.keymap.set({ "n", "t" }, "<A-h>", func.horiz_toggle, { noremap = true, silent = true })
 vim.keymap.set({ "n", "t" }, "<A-v>", func.vert_toggle, { noremap = true, silent = true })
 
--- Nvim completion
-vim.keymap.set("i", "<Tab>", function()
-  return func.smart_tab()
-end, { expr = true, noremap = true })
+-- mini completion
+vim.keymap.set("i", "<Tab>", function() return func.smart_tab() end, { expr = true, noremap = true })
+vim.keymap.set("i", "<S-Tab>", function() return func.smart_s_tab() end, { expr = true, noremap = true })
 
-vim.keymap.set("i", "<S-Tab>", function()
-  return func.smart_s_tab()
-end, { expr = true, noremap = true })
+--undo tree
+vim.keymap.set({ 'n', 'v', 't' }, '<leader>u', ':UndotreeToggle<CR>', { noremap = true, silent = true })
