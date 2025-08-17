@@ -17,33 +17,6 @@ vim.o.incsearch = true
 vim.o.undofile = true
 vim.opt.colorcolumn = "80"
 
---------------------------------Nvim keybinds ---------------------------------
-vim.g.mapleader = " "
-
-vim.keymap.set('n', '<leader>so', ':update<CR> :source<CR>')
-vim.keymap.set('n', '<leader>w', ':write<CR>')
-vim.keymap.set('n', '<leader>x', ':quit<CR>')
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>v', ':e $MYVIMRC<CR>') --Look into this
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>s', ':e #<CR>')        --Look into this
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>S', ':sf #<CR>')       --Look into this
-
---Mini pick
-vim.keymap.set('n', '<leader>ff', ':Pick files<CR>')
-vim.keymap.set('n', '<leader>fw', ':Pick grep_live<CR>')
-vim.keymap.set('n', '<leader>h', ':Pick help<CR>')
-
---lsp
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { desc = "formats the code" })
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "goto defination" })
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "goto declaration" })
-vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "Go to implementation" })
-vim.keymap.set("n", "<leader>ad", vim.diagnostic.setloclist, { desc = "Open all diagonostic" })
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open diagonostic message in float" })
-
---Nvim tree
-vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-
 --------------------------------Nvim Packages ---------------------------------
 vim.pack.add({
 	{ src = "https://github.com/vague2k/vague.nvim" },
@@ -67,7 +40,7 @@ require("mason").setup({})
 require("mini.pairs").setup({})
 require("mini.pick").setup({})
 require("mini.completion").setup({})
-
+local func = require("func")
 
 ---------------------------------Toggle Term ----------------------------------
 require("toggleterm").setup({
@@ -79,25 +52,6 @@ require("toggleterm").setup({
 	}
 })
 
-local Terminal = require("toggleterm.terminal").Terminal
-local float_term = Terminal:new({ direction = "float" })
-function _FLOAT_TOGGLE()
-	float_term:toggle()
-end
-
-local horiz_term = Terminal:new({ direction = "horizontal", size = 15 })
-function _HORIZ_TOGGLE()
-	horiz_term:toggle()
-end
-
-local verti_term = Terminal:new({ direction = "vertical", size = 55 })
-function _VERT_TOGGLE()
-	verti_term:toggle()
-end
-
-vim.keymap.set({ "n", "t" }, "<A-i>", _FLOAT_TOGGLE, { noremap = true, silent = true })
-vim.keymap.set({ "n", "t" }, "<A-h>", _HORIZ_TOGGLE, { noremap = true, silent = true })
-vim.keymap.set({ "n", "t" }, "<A-v>", _VERT_TOGGLE, { noremap = true, silent = true })
 
 -- This is for the navigation in terminal
 function _G.set_terminal_keymaps()
@@ -162,3 +116,39 @@ require "nvim-treesitter.configs".setup({
 -----------------------------Snippets------------------------------------------
 require("luasnip").setup({ enable_autosnippets = true })
 require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
+
+--------------------------------Nvim keybinds ---------------------------------
+vim.g.mapleader = " "
+
+vim.keymap.set('n', '<leader>so', ':update<CR> :source<CR>')
+vim.keymap.set('n', '<leader>w', ':write<CR>')
+vim.keymap.set('n', '<leader>x', ':quit<CR>')
+vim.keymap.set({ 'n', 'v', 'x' }, '<leader>v', ':e $MYVIMRC<CR>') --Look into this
+vim.keymap.set({ 'n', 'v', 'x' }, '<leader>s', ':e #<CR>')        --Look into this
+vim.keymap.set({ 'n', 'v', 'x' }, '<leader>S', ':sf #<CR>')       --Look into this
+
+--Mini pick
+vim.keymap.set('n', '<leader>ff', ':Pick files<CR>')
+vim.keymap.set('n', '<leader>fw', ':Pick grep_live<CR>')
+vim.keymap.set('n', '<leader>h', ':Pick help<CR>')
+
+--lsp
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { desc = "formats the code" })
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "goto defination" })
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "goto declaration" })
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "Go to implementation" })
+vim.keymap.set("n", "<leader>ad", vim.diagnostic.setloclist, { desc = "Open all diagonostic" })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open diagonostic message in float" })
+
+--Nvim tree
+vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+
+-- Toggle Terminal
+vim.keymap.set({ "n", "t" }, "<A-i>", func.float_toggle, { noremap = true, silent = true })
+vim.keymap.set({ "n", "t" }, "<A-h>", func.horiz_toggle, { noremap = true, silent = true })
+vim.keymap.set({ "n", "t" }, "<A-v>", func.vert_toggle, { noremap = true, silent = true })
+
+-- Nvim completion
+vim.keymap.set("i", "<Tab>", func.smart_tab(), { expr = true, noremap = true })
+vim.keymap.set("i", "<S-Tab>", func.smart_s_tab(){ expr = true, noremap = true })
