@@ -33,9 +33,13 @@ vim.keymap.set('n', '<leader>fw', ':Pick grep_live<CR>')
 vim.keymap.set('n', '<leader>h', ':Pick help<CR>')
 
 --lsp
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap = true, silent = true })
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { desc = "formats the code" })
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "goto defination" })
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "goto declaration" })
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "Go to implementation" })
+vim.keymap.set("n", "<leader>ad", vim.diagnostic.setloclist, { desc = "Open all diagonostic" })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open diagonostic message in float" })
 
 --Nvim tree
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
@@ -43,7 +47,6 @@ vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent
 --------------------------------Nvim Packages ---------------------------------
 vim.pack.add({
 	{ src = "https://github.com/vague2k/vague.nvim" },
-	{ src = "https://github.com/echasnovski/mini.pick" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/arnamak/stay-centered.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-tree.lua" },
@@ -53,13 +56,18 @@ vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/akinsho/toggleterm.nvim" },
 	{ src = "https://github.com/mbbill/undotree" },
+	{ src = "https://github.com/echasnovski/mini.nvim" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 })
 
 -----------------------Package with Defaults-----------------------------------
 require("nvim-web-devicons").setup({})
 require("stay-centered").setup({})
 require("mason").setup({})
+require("mini.pairs").setup({})
 require("mini.pick").setup({})
+require("mini.completion").setup({})
+
 
 ---------------------------------Toggle Term ----------------------------------
 require("toggleterm").setup({
@@ -125,10 +133,31 @@ vim.cmd [[
   highlight Normal ctermbg=none
   highlight NonText ctermbg=none
 ]]
+--transparent floating window
+vim.cmd [[
+  highlight NormalFloat guibg=none
+  highlight FloatBorder guibg=none
+]]
+
 
 --------------------------lsp -------------------------------------------------
-vim.lsp.enable({ "lua_ls", "clang" })
+vim.lsp.enable({
+	"lua_ls",
+	"clang",
+	"gopls",
+})
 
+
+----------------------------------Tree Sitter----------------------------------
+require "nvim-treesitter.configs".setup({
+	ensure_installed = {
+		"go",
+		"lua",
+		"c",
+		"rust",
+	},
+	highlight = { enable = true }
+})
 
 -----------------------------Snippets------------------------------------------
 require("luasnip").setup({ enable_autosnippets = true })
