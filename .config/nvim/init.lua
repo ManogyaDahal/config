@@ -1,4 +1,5 @@
 --------------------------------Nvim Options ----------------------------------
+vim.g.mapleader = " "
 vim.o.clipboard = "unnamedplus"
 vim.o.hlsearch = false
 vim.o.tabstop = 2
@@ -38,8 +39,15 @@ require("nvim-web-devicons").setup({})
 require("stay-centered").setup({})
 require("mason").setup({})
 require("mini.pairs").setup({})
-require("mini.pick").setup({})
 require("mini.completion").setup({})
+require("mini.pick").setup({
+  mappings = {
+    move_down  = '<Tab>',
+    move_up    = '<S-Tab>',
+    toggle_info    = '<C-i>',
+    toggle_preview = '<C-p>',
+}
+})
 local func = require("func")
 
 ---------------------------------Toggle Term ----------------------------------
@@ -51,7 +59,6 @@ require("toggleterm").setup({
 		border = 'curved'
 	}
 })
-
 
 -- This is for the navigation in terminal
 function _G.set_terminal_keymaps()
@@ -101,13 +108,13 @@ vim.lsp.enable({
 	"gopls",
 })
 
-
 ----------------------------------Tree Sitter----------------------------------
 require "nvim-treesitter.configs".setup({
 	ensure_installed = {
-		"go",
-		"lua",
 		"c",
+		"go",
+		"javascript",
+		"lua",
 		"rust",
 	},
 	highlight = { enable = true }
@@ -118,8 +125,6 @@ require("luasnip").setup({ enable_autosnippets = true })
 require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
 
 --------------------------------Nvim keybinds ---------------------------------
-vim.g.mapleader = " "
-
 vim.keymap.set('n', '<leader>so', ':update<CR> :source<CR>')
 vim.keymap.set('n', '<leader>w', ':write<CR>')
 vim.keymap.set('n', '<leader>x', ':quit<CR>')
@@ -129,6 +134,8 @@ vim.keymap.set({ 'n', 'v', 'x' }, '<leader>S', ':sf #<CR>')       --Look into th
 
 --Mini pick
 vim.keymap.set('n', '<leader>ff', ':Pick files<CR>')
+vim.keymap.set('n', '<leader>vs', ':<CR>')
+vim.keymap.set('n', '<leader>vs', ':Pick buffers<CR>')
 vim.keymap.set('n', '<leader>fw', ':Pick grep_live<CR>')
 vim.keymap.set('n', '<leader>h', ':Pick help<CR>')
 
@@ -150,5 +157,10 @@ vim.keymap.set({ "n", "t" }, "<A-h>", func.horiz_toggle, { noremap = true, silen
 vim.keymap.set({ "n", "t" }, "<A-v>", func.vert_toggle, { noremap = true, silent = true })
 
 -- Nvim completion
-vim.keymap.set("i", "<Tab>", func.smart_tab(), { expr = true, noremap = true })
-vim.keymap.set("i", "<S-Tab>", func.smart_s_tab(){ expr = true, noremap = true })
+vim.keymap.set("i", "<Tab>", function()
+  return func.smart_tab()
+end, { expr = true, noremap = true })
+
+vim.keymap.set("i", "<S-Tab>", function()
+  return func.smart_s_tab()
+end, { expr = true, noremap = true })
