@@ -18,6 +18,9 @@ vim.o.incsearch = true
 vim.o.undofile = true
 vim.opt.colorcolumn = "80"
 
+vim.g.undotree_WindowLayout = 2
+vim.g.undotree_SplitWidth = 50
+vim.g.undotree_SetFocusWhenToggle = 1
 --------------------------------Nvim Packages ---------------------------------
 vim.pack.add({
 	{ src = "https://github.com/vague2k/vague.nvim" },
@@ -43,15 +46,13 @@ require("mini.completion").setup({})
 require("mini.comment").setup({})
 local func = require("func")
 require("mini.pick").setup({
-  mappings = {
-    move_up = '<S-Tab>',
-    move_down = '<Tab>',
-    toggle_info = '<C-t>',
-	toggle_preview = '<C-p>',
-  },
+	mappings = {
+		move_up = '<S-Tab>',
+		move_down = '<Tab>',
+		toggle_info = '<C-t>',
+		toggle_preview = '<C-p>',
+	},
 })
-
-require("undotree").setup({})
 
 ---------------------------------Toggle Term ----------------------------------
 require("toggleterm").setup({
@@ -132,6 +133,8 @@ require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
 vim.keymap.set('n', '<leader>so', ':update<CR> :source<CR>')
 vim.keymap.set('n', '<leader>w', ':write<CR>')
 vim.keymap.set('n', '<leader>x', ':quit<CR>')
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>v', ':e $MYVIMRC<CR>') --Look into this
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>s', ':e #<CR>')        --Look into this
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>S', ':sf #<CR>')       --Look into this
@@ -163,5 +166,6 @@ vim.keymap.set({ "n", "t" }, "<A-v>", func.vert_toggle, { noremap = true, silent
 vim.keymap.set("i", "<Tab>", function() return func.smart_tab() end, { expr = true, noremap = true })
 vim.keymap.set("i", "<S-Tab>", function() return func.smart_s_tab() end, { expr = true, noremap = true })
 
---undo tree
-vim.keymap.set({ 'n', 'v', 't' }, '<leader>u', ':UndotreeToggle<CR>', { noremap = true, silent = true })
+-- undo tree
+vim.keymap.set({ 'n', 'v', 't' }, '<leader>u', ':UndotreeToggle<CR>',
+               { noremap = true, silent = true, desc = "Toggle Undotree" })
