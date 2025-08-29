@@ -19,8 +19,9 @@ vim.o.undofile = true
 vim.opt.colorcolumn = "80"
 
 vim.g.undotree_WindowLayout = 2
-vim.g.undotree_SplitWidth = 50
+vim.g.undotree_SplitWidth = 30
 vim.g.undotree_SetFocusWhenToggle = 1
+
 --------------------------------Nvim Packages ---------------------------------
 vim.pack.add({
 	{ src = "https://github.com/vague2k/vague.nvim" },
@@ -120,6 +121,7 @@ require "nvim-treesitter.configs".setup({
 		"go",
 		"javascript",
 		"lua",
+		"python",
 		"rust",
 	},
 	highlight = { enable = true }
@@ -168,4 +170,4 @@ vim.keymap.set("i", "<S-Tab>", function() return func.smart_s_tab() end, { expr 
 
 -- undo tree
 vim.keymap.set({ 'n', 'v', 't' }, '<leader>u', ':UndotreeToggle<CR>',
-               { noremap = true, silent = true, desc = "Toggle Undotree" })
+			{ noremap = true, silent = true, desc = "Toggle Undotree" })
