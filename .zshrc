@@ -4,6 +4,7 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -112,3 +113,4 @@ eval "$(zoxide init --cmd cd zsh)"
  alias l.="eza -a | grep -e '^\.'"          
  alias sleep='systemctl suspend'
  bindkey -s ^p "~/.local/bin/tmux-sessionizer.sh\n"
+ alias nvim='~/.local/share/bob/nvim-bin/nvim'
