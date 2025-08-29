@@ -40,7 +40,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class          instance    title             tags mask     isfloating   monitor */
-   {"firefox",       NULL,       NULL,         1 << 3,         0,           -1},
+   {"zen",       NULL,       NULL,         		1 << 3,         0,           -1},
    {"TelegramDesktop", NULL,       NULL,         1 << 2,         0,           -1 },
    {"discord",         NULL,       NULL,         1 << 2,         0,           -1 },
    {"com.github.th_ch.youtube_music",         NULL,       NULL,         1 << 1,         0,           -1 },
@@ -101,13 +101,14 @@ static const Key keys[] = {
   {0,           F6,               spawn, SHCMD("~/.local/bin/brightness.sh up")},
   {0,           F5,               spawn, SHCMD("~/.local/bin/brightness.sh down")},
   {0,           F4,               spawn, SHCMD("alacritty -e ranger ~/School")},
-  {MODKEY,      XK_p,             spawn, SHCMD("firefox --private-window --new-tab")},//new tab for private window
+  {MODKEY,      XK_b,             spawn, SHCMD("zen-browser --private-window --new-tab")},//new tab for private window
+  {MODKEY,      XK_p,             spawn, SHCMD("zen-browser --private-window --new-tab")},//new tab for private window
   // custom keybindings start {end}
 
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_i,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,                       XK_B,      togglebar,      {0} },
 	{ MODKEY,                       XK_k,      focusstackvis,  {.i = +1 } },
 	{ MODKEY,                       XK_j,      focusstackvis,  {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_k,      focusstackhid,  {.i = +1 } },
