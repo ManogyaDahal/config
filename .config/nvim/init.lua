@@ -17,12 +17,13 @@ vim.o.winborder = "rounded"
 vim.o.incsearch = true
 vim.o.undofile = true
 vim.opt.colorcolumn = "80"
+vim.opt.termguicolors = true
 
 vim.g.undotree_WindowLayout = 2
 vim.g.undotree_SplitWidth = 30
 vim.g.undotree_SetFocusWhenToggle = 1
 
---------------------------------Nvim Packages ---------------------------------
+-------------------------------Nvim Packages ---------------------------------
 vim.pack.add({
 	{ src = "https://github.com/vague2k/vague.nvim" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
@@ -32,7 +33,6 @@ vim.pack.add({
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/akinsho/toggleterm.nvim" },
 	{ src = "https://github.com/mbbill/undotree" },
 	{ src = "https://github.com/echasnovski/mini.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
@@ -45,33 +45,8 @@ require("mason").setup({})
 require("mini.pairs").setup({})
 require("mini.completion").setup({})
 require("mini.comment").setup({})
+require("mini.pick").setup({})
 local func = require("func")
-require("mini.pick").setup({
-	mappings = {
-		move_up = '<S-Tab>',
-		move_down = '<Tab>',
-		toggle_info = '<C-t>',
-		toggle_preview = '<C-p>',
-	},
-})
-
----------------------------------Toggle Term ----------------------------------
-require("toggleterm").setup({
-	shade_terminals = false,
-	start_in_insert = true,
-	persist_size = false,
-	float_opts = {
-		border = 'curved'
-	}
-})
-
--- This is for the navigation in terminal
-function _G.set_terminal_keymaps()
-	vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { buffer = 0 })
-	vim.keymap.set('t', 'jk', [[<C-\><C-n>]], { buffer = 0 })
-end
-
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 ----------------------------Nvim Tree------------------------------------------
 require('nvim-tree').setup({
@@ -91,19 +66,23 @@ require('nvim-tree').setup({
 })
 
 ---------------------Color Scheme and Transparency-----------------------------
-vim.cmd("colorscheme vague")
-vim.cmd(":hi statusline guibg=NONE")
-vim.cmd [[
-  highlight Normal guibg=none
-  highlight NonText guibg=none
-  highlight Normal ctermbg=none
-  highlight NonText ctermbg=none
-]]
---transparent floating window
-vim.cmd [[
-  highlight NormalFloat guibg=none
-  highlight FloatBorder guibg=none
-]]
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+	vim.cmd("colorscheme vague")
+	vim.cmd(":hi statusline guibg=NONE")
+	vim.cmd [[
+  		highlight Normal guibg=none
+  		highlight NonText guibg=none
+  		highlight Normal ctermbg=none
+  		highlight NonText ctermbg=none
+	]]
+	--transparent floating window
+	vim.cmd [[
+  	highlight NormalFloat guibg=none
+  	highlight FloatBorder guibg=none
+	]]
+  end,
+})
 
 
 --------------------------lsp -------------------------------------------------
@@ -111,8 +90,10 @@ vim.lsp.enable({
 	"lua_ls",
 	"clangd",
 	"gopls",
+	"pylsp",
 	"rust_analyzer",
 })
+
 
 ----------------------------------Tree Sitter----------------------------------
 require "nvim-treesitter.configs".setup({
@@ -136,10 +117,8 @@ vim.keymap.set('n', '<leader>so', ':update<CR> :source<CR>')
 vim.keymap.set('n', '<leader>w', ':write<CR>')
 vim.keymap.set('n', '<leader>x', ':quit<CR>')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<leader>sv', ':vsplit<CR>')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>v', ':e $MYVIMRC<CR>') --Look into this
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>s', ':e #<CR>')        --Look into this
-vim.keymap.set({ 'n', 'v', 'x' }, '<leader>S', ':sf #<CR>')       --Look into this
 
 --Mini pick
 vim.keymap.set('n', '<leader>ff', ':Pick files<CR>')
@@ -158,11 +137,6 @@ vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open diago
 
 --Nvim tree
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-
--- Toggle Terminal
-vim.keymap.set({ "n", "t" }, "<A-i>", func.float_toggle, { noremap = true, silent = true })
-vim.keymap.set({ "n", "t" }, "<A-h>", func.horiz_toggle, { noremap = true, silent = true })
-vim.keymap.set({ "n", "t" }, "<A-v>", func.vert_toggle, { noremap = true, silent = true })
 
 -- mini completion
 vim.keymap.set("i", "<Tab>", function() return func.smart_tab() end, { expr = true, noremap = true })
