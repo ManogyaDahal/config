@@ -34,6 +34,7 @@ static const char *colors[][3] = {
 /* tagging */
 static const char *tags[] = {"1", "2", "3" ,"4", "5", "6", "7", "8", "9"};
 
+
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -101,14 +102,13 @@ static const Key keys[] = {
   {0,           F6,               spawn, SHCMD("~/.local/bin/brightness.sh up")},
   {0,           F5,               spawn, SHCMD("~/.local/bin/brightness.sh down")},
   {0,           F4,               spawn, SHCMD("alacritty -e ranger ~/School")},
-  {MODKEY,      XK_b,             spawn, SHCMD("zen-browser")},//new tab for private window
   {MODKEY,      XK_p,             spawn, SHCMD("zen-browser --private-window --new-tab")},//new tab for private window
   // custom keybindings start {end}
 
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_i,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
+	{ MODKEY,             			XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_k,      focusstackvis,  {.i = +1 } },
 	{ MODKEY,                       XK_j,      focusstackvis,  {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_k,      focusstackhid,  {.i = +1 } },
