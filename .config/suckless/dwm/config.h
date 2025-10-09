@@ -34,13 +34,14 @@ static const char *colors[][3] = {
 /* tagging */
 static const char *tags[] = {"1", "2", "3" ,"4", "5", "6", "7", "8", "9"};
 
+
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class          instance    title             tags mask     isfloating   monitor */
-   {"firefox",       NULL,       NULL,         1 << 3,         0,           -1},
+   {"zen",       NULL,       NULL,         		1 << 3,         0,           -1},
    {"TelegramDesktop", NULL,       NULL,         1 << 2,         0,           -1 },
    {"discord",         NULL,       NULL,         1 << 2,         0,           -1 },
    {"com.github.th_ch.youtube_music",         NULL,       NULL,         1 << 1,         0,           -1 },
@@ -96,18 +97,18 @@ static const Key keys[] = {
   {0,           F3,               spawn, SHCMD("~/.local/bin/volumenotifier.sh up")},
   {0,           F2,               spawn, SHCMD("~/.local/bin/volumenotifier.sh down")},
   {0,           F1,               spawn, SHCMD("~/.local/bin/volumenotifier.sh mute")},
-  {0,           F9,               spawn, SHCMD("betterlockscreen -l blur")}, //to lock screen
+  {0,           F9,               spawn, SHCMD("~/.local/bin/power_menu")}, //to lock screen
   {0,           printsc,          spawn, SHCMD("flameshot gui")}, //to take screenshot
   {0,           F6,               spawn, SHCMD("~/.local/bin/brightness.sh up")},
   {0,           F5,               spawn, SHCMD("~/.local/bin/brightness.sh down")},
   {0,           F4,               spawn, SHCMD("alacritty -e ranger ~/School")},
-  {MODKEY,      XK_p,             spawn, SHCMD("firefox --private-window --new-tab")},//new tab for private window
+  {MODKEY,      XK_p,             spawn, SHCMD("zen-browser --private-window --new-tab")},//new tab for private window
   // custom keybindings start {end}
 
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_i,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,             			XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_k,      focusstackvis,  {.i = +1 } },
 	{ MODKEY,                       XK_j,      focusstackvis,  {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_k,      focusstackhid,  {.i = +1 } },
