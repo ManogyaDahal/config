@@ -33,6 +33,8 @@ vim.pack.add({
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/mfussenegger/nvim-lint" },
+	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/mbbill/undotree" },
 	{ src = "https://github.com/echasnovski/mini.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
@@ -107,6 +109,18 @@ require "nvim-treesitter.configs".setup({
 	},
 	highlight = { enable = true }
 })
+----------------------------Conform Nvim (Formatter)---------------------------
+require("conform").setup({
+  formatters_by_ft = {
+    lua = { "stylua" },
+    python = { "isort", "black" },
+    rust = { "rustfmt", lsp_format = "fallback", stop_after_first = true },
+  },
+})
+-------------------------------nvim lint (linter)------------------------------
+require('lint').linters_by_ft = {
+  markdown = {'vale'},
+}
 
 -----------------------------Snippets------------------------------------------
 require("luasnip").setup({ enable_autosnippets = true })
