@@ -7,10 +7,9 @@ vim.o.number = true
 vim.o.ignorecase = true
 vim.o.relativenumber = true
 vim.o.wrap = false
-vim.o.tabstop = 4
 vim.o.swapfile = false
 vim.o.scrolloff = 0
-vim.o.shiftwidth = 4
+vim.o.shiftwidth = 2
 vim.o.signcolumn = "yes"
 vim.o.smartindent = true
 vim.o.winborder = "rounded"
@@ -38,6 +37,8 @@ vim.pack.add({
 	{ src = "https://github.com/mbbill/undotree" },
 	{ src = "https://github.com/echasnovski/mini.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 })
 
 -----------------------Package with Defaults-----------------------------------
@@ -47,8 +48,15 @@ require("mason").setup({})
 require("mini.pairs").setup({})
 require("mini.completion").setup({})
 require("mini.comment").setup({})
-require("mini.pick").setup({})
 local func = require("func")
+
+---------------------------- Telescope ------------------------------------------
+require("telescope").setup({
+	defaults = {
+        layout_strategy = 'horizontal',
+        layout_config = { preview_width = 0.6 }
+	},
+})
 
 ----------------------------Nvim Tree------------------------------------------
 require('nvim-tree').setup({
@@ -94,9 +102,9 @@ vim.lsp.enable({
 	"gopls",
 	"pylsp",
 	"rust_analyzer",
+	"biome",
+	"vtsls"
 })
-
-
 ----------------------------------Tree Sitter----------------------------------
 require "nvim-treesitter.configs".setup({
 	ensure_installed = {
@@ -134,19 +142,20 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<leader>sv', ':vsplit<CR>')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
---Mini pick
-vim.keymap.set('n', '<leader>ff', ':Pick files<CR>')
-vim.keymap.set('n', '<leader>lb', ':Pick buffers<CR>')
-vim.keymap.set('n', '<leader>fw', ':Pick grep_live<CR>')
-vim.keymap.set('n', '<leader>h', ':Pick help<CR>')
+--Telescope
+vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>')
+vim.keymap.set('n', '<leader>lb', ':Telescope buffers<CR>')
+vim.keymap.set('n', '<leader>fw', ':Telescope live_grep<CR>')
+vim.keymap.set('n', '<leader>gr', ':Telescope lsp_references<CR>', { noremap = true, silent = true, desc = "Go to references" })
+vim.keymap.set('n', '<leader>ad', ':Telescope diagnostics<CR>', { noremap = true, silent = true, desc = "Go to references" })
+vim.keymap.set('n', 'gd',         ':Telescope lsp_definitions<CR>', { desc = "goto defination" })
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "goto declaration" })
+
 
 --lsp
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { desc = "formats the code" })
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "goto defination" })
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "goto declaration" })
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "Go to implementation" })
-vim.keymap.set("n", "<leader>ad", vim.diagnostic.setloclist, { desc = "Open all diagonostic" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open diagonostic message in float" })
 
 --Nvim tree
