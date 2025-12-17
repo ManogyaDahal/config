@@ -36,10 +36,12 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/mbbill/undotree" },
 	{ src = "https://github.com/echasnovski/mini.nvim" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+	-- { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/OXY2DEV/markview.nvim" },
+	{ src = "https://github.com/aznhe21/actions-preview.nvim" },
+	{ src = "https://github.com/chentoast/marks.nvim" },
 })
 
 -----------------------Package with Defaults-----------------------------------
@@ -58,14 +60,46 @@ require("markview").setup({
 });
 
 vim.api.nvim_set_keymap("n", "<leader>pm", "<CMD>Markview splitToggle<CR>", { desc = "Toggles `splitview` for current buffer." });
-
+----------------------------marks------------------------------------------
+require "marks".setup {
+	builtin_marks = { "<", ">", "^" },
+}
 ---------------------------- Telescope ------------------------------------------
-require("telescope").setup({
+local telescope = require("telescope")
+telescope.setup({
 	defaults = {
-        layout_strategy = 'horizontal',
-        layout_config = { preview_width = 0.6 }
-	},
+		preview = { treesitter = false },
+		color_devicons = true,
+		sorting_strategy = "ascending",
+		borderchars = {
+			"", -- top
+			"", -- right
+			"", -- bottom
+			"", -- left
+			"", -- top-left
+			"", -- top-right
+			"", -- bottom-right
+			"", -- bottom-left
+		},
+		path_displays = { "smart" },
+		layout_config = {
+			height = 100,
+			width = 400,
+			prompt_position = "top",
+			preview_cutoff = 40,
+		}
+	}
 })
+local builtin = require("telescope.builtin")
+
+------------------------Actions prev------------------------------------------
+require("actions-preview").setup {
+	backend = { "telescope" },
+	telescope = vim.tbl_extend(
+		"force",
+		require("telescope.themes").get_dropdown(), {}
+	)
+}
 
 ----------------------------Nvim Tree------------------------------------------
 require('nvim-tree').setup({
@@ -115,17 +149,17 @@ vim.lsp.enable({
 	"vtsls"
 })
 ----------------------------------Tree Sitter----------------------------------
-require "nvim-treesitter.configs".setup({
-	ensure_installed = {
-		"c",
-		"go",
-		"javascript",
-		"lua",
-		"python",
-		"rust",
-	},
-	highlight = { enable = true }
-})
+-- require "nvim-treesitter.configs".setup({
+-- 	ensure_installed = {
+-- 		"c",
+-- 		"go",
+-- 		"javascript",
+-- 		"lua",
+-- 		"python",
+-- 		"rust",
+-- 	},
+-- 	highlight = { enable = true }
+-- })
 ----------------------------Conform Nvim (Formatter)---------------------------
 require("conform").setup({
   formatters_by_ft = {
@@ -152,13 +186,21 @@ vim.keymap.set('n', '<leader>sv', ':vsplit<CR>')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
 --Telescope
-vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>')
-vim.keymap.set('n', '<leader>lb', ':Telescope buffers<CR>')
-vim.keymap.set('n', '<leader>fw', ':Telescope live_grep<CR>')
-vim.keymap.set('n', '<leader>gr', ':Telescope lsp_references<CR>', { noremap = true, silent = true, desc = "Go to references" })
-vim.keymap.set('n', '<leader>ad', ':Telescope diagnostics<CR>', { noremap = true, silent = true, desc = "Go to references" })
-vim.keymap.set('n', 'gd',         ':Telescope lsp_definitions<CR>', { desc = "goto defination" })
+vim.keymap.set('n', '<leader>ff', builtin.find_files)
+vim.keymap.set('n', '<leader>fw', builtin.live_grep)
+vim.keymap.set({ "n" }, "<leader>ss", builtin.current_buffer_fuzzy_find)
+vim.keymap.set('n', '<leader>gr', builtin.lsp_references, { noremap = true, silent = true, desc = "Go to references" })
+vim.keymap.set('n', '<leader>ad', builtin.diagnostics, { noremap = true, silent = true, desc = "Go to references" })
+vim.keymap.set('n', 'gd',         builtin.lsp_definitions, { desc = "goto defination" })
+vim.keymap.set({ "n" }, "<leader>fb", builtin.buffers)
+vim.keymap.set({ "n" }, "<leader>sm", builtin.man_pages)
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "goto declaration" })
+
+vim.keymap.set({ "n" }, "<leader>si", builtin.lsp_implementations)
+vim.keymap.set({ "n" }, "<leader>sT", builtin.lsp_type_definitions)
+vim.keymap.set({ "n" }, "<leader>st", builtin.builtin)
+vim.keymap.set({ "n" }, "<leader>sc", builtin.git_bcommits)
+vim.keymap.set({ "n" }, "<leader>sk", builtin.keymaps)
 
 
 --lsp
