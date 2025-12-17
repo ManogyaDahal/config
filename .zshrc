@@ -90,6 +90,8 @@ fi
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
 
+# golang blueprint
+GOPATH=$HOME/go  PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 # Set personal aliases, overriding those provided by Oh My Zsh libs,
 # plugins, and themes. Aliases can be placed here, though Oh My Zsh
@@ -113,3 +115,15 @@ eval "$(zoxide init --cmd cd zsh)"
  alias sleep='systemctl suspend'
  bindkey -s ^p "~/.local/bin/tmux-sessionizer.sh\n"
  alias nvim='~/.local/share/bob/nvim-bin/nvim'
+
+# pnpm
+export PNPM_HOME="/home/manogya/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

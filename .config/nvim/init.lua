@@ -39,6 +39,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/OXY2DEV/markview.nvim" },
 })
 
 -----------------------Package with Defaults-----------------------------------
@@ -49,6 +50,14 @@ require("mini.pairs").setup({})
 require("mini.completion").setup({})
 require("mini.comment").setup({})
 local func = require("func")
+
+--------------------------Markview-------------------------------------------
+-- Disable automatic previews.
+require("markview").setup({
+    preview = { enable = false }
+});
+
+vim.api.nvim_set_keymap("n", "<leader>pm", "<CMD>Markview splitToggle<CR>", { desc = "Toggles `splitview` for current buffer." });
 
 ---------------------------- Telescope ------------------------------------------
 require("telescope").setup({
@@ -157,6 +166,8 @@ vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { desc = "formats the code" })
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "Go to implementation" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open diagonostic message in float" })
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Open diagonostic message in float" })
+
 
 --Nvim tree
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
