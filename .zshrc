@@ -114,7 +114,7 @@ eval "$(zoxide init --cmd cd zsh)"
  alias l.="eza -a | grep -e '^\.'"          
  alias sleep='systemctl suspend'
  bindkey -s ^p "~/.local/bin/tmux-sessionizer.sh\n"
- alias nvim='~/.local/share/bob/nvim-bin/nvim'
+ alias n='~/.local/share/bob/nvim-bin/nvim'
 alias ignoreit="curl -fsSL https://raw.githubusercontent.com/razzat008/ignoreit/refs/heads/master/useit.sh | sh -s -- "
 
 # # pnpm
