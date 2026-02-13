@@ -35,13 +35,14 @@ vim.pack.add({
 	{ src = "https://github.com/mfussenegger/nvim-lint" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/mbbill/undotree" },
-	{ src = "https://github.com/echasnovski/mini.nvim" },
-	-- { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
-	{ src = "https://github.com/OXY2DEV/markview.nvim" },
 	{ src = "https://github.com/aznhe21/actions-preview.nvim" },
 	{ src = "https://github.com/chentoast/marks.nvim" },
+	{ src = "https://github.com/nvim-mini/mini.nvim" },
 })
 
 -----------------------Package with Defaults-----------------------------------
@@ -50,16 +51,11 @@ require("stay-centered").setup({})
 require("mason").setup({})
 require("mini.pairs").setup({})
 require("mini.completion").setup({})
-require("mini.comment").setup({})
+require("nvim-treesitter").setup({})
 local func = require("func")
 
---------------------------Markview-------------------------------------------
--- Disable automatic previews.
-require("markview").setup({
-    preview = { enable = false }
-});
-
-vim.api.nvim_set_keymap("n", "<leader>pm", "<CMD>Markview splitToggle<CR>", { desc = "Toggles `splitview` for current buffer." });
+-------------------------render-markdown-------------------------------------------
+require("render-markdown").setup({})
 ----------------------------marks------------------------------------------
 require "marks".setup {
 	builtin_marks = { "<", ">", "^" },
@@ -145,8 +141,8 @@ vim.lsp.enable({
 	"gopls",
 	"pylsp",
 	"rust_analyzer",
-	"biome",
-	"vtsls"
+	"ts_ls",
+	"texlab",
 })
 ----------------------------------Tree Sitter----------------------------------
 -- require "nvim-treesitter.configs".setup({
@@ -202,13 +198,12 @@ vim.keymap.set({ "n" }, "<leader>st", builtin.builtin)
 vim.keymap.set({ "n" }, "<leader>sc", builtin.git_bcommits)
 vim.keymap.set({ "n" }, "<leader>sk", builtin.keymaps)
 
-
 --lsp
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { desc = "formats the code" })
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "Go to implementation" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open diagonostic message in float" })
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Open diagonostic message in float" })
+vim.keymap.set("n", "<leader>ca", require("actions-preview").code_actions, { desc = "Open diagonostic message in float" })
 
 
 --Nvim tree

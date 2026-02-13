@@ -14,9 +14,9 @@ end
 -- Shift-Tab completion
 function M.smart_s_tab()
   if vim.fn.pumvisible() == 1 then
-    return "<C-p>"  -- move up in menu
+    return "<C-p>"
   else
-    return "<C-x><C-o>"  -- trigger completion
+    return "<S-Tab>"  -- or "<Tab>" if you want dedent behavior
   end
 end
 

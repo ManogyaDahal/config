@@ -115,13 +115,14 @@ eval "$(zoxide init --cmd cd zsh)"
  alias sleep='systemctl suspend'
  bindkey -s ^p "~/.local/bin/tmux-sessionizer.sh\n"
  alias nvim='~/.local/share/bob/nvim-bin/nvim'
+alias ignoreit="curl -fsSL https://raw.githubusercontent.com/razzat008/ignoreit/refs/heads/master/useit.sh | sh -s -- "
 
-# pnpm
-export PNPM_HOME="/home/manogya/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+# # pnpm
+# export PNPM_HOME="/home/manogya/.local/share/pnpm"
+# case ":$PATH:" in
+#   *":$PNPM_HOME:"*) ;;
+#   *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
 # pnpm end
 
 export NVM_DIR="$HOME/.nvm"
