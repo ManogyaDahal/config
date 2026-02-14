@@ -7,7 +7,7 @@ WINIT_X11_SCALE_FACTOR = "1.5"
 dynamic_padding = true
 decorations = "full"
 title = "Alacritty@Arch"
-opacity = 1.00
+opacity = 0.9 
 decorations_theme_variant = "Dark"
 
 [window.dimensions]
