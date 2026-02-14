@@ -6,7 +6,7 @@
   local M = {}
 
 M.base46 = {
-  theme = "gruvchad",    -- use NvChad’s default theme
+  theme = "oxocarbon",    -- use NvChad’s default theme
   transparency = true,  -- keep as needed
   hl_add = {},           -- no extra highlights yet
 }
