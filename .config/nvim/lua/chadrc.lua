@@ -6,7 +6,7 @@
   local M = {}
 
 M.base46 = {
-  theme = "oxocarbon",    -- use NvChad’s default theme
+  theme = "nord",    -- use NvChad’s default theme
   transparency = true,  -- keep as needed
   hl_add = {},           -- no extra highlights yet
 }
@@ -68,9 +68,9 @@ M.base46 = {
 
     -- Set menu
     buttons = {
-      { txt = "  > Find file",keys = "ff", cmd = "Telescope oldfiles" },
-      { txt = "  > Find Word"   ,keys = "fw", cmd = "Telescope live_grep" },
-      { txt = "󱥚  > Themes" ,keys = "th", cmd = ":lua require('nvchad.themes').open()" },
+      -- { txt = "  > Find file",keys = "ff", cmd = "Telescope find_files" },
+      -- { txt = "  > Find Word"   ,keys = "fw", cmd = "Telescope live_grep" },
+      -- { txt = "󱥚  > Themes" ,keys = "th", cmd = ":lua require('nvchad.themes').open()" },
     },
   }
 
