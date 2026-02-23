@@ -3,7 +3,7 @@
 -- Please read that file to know all available options :( 
 
   -- -@type ChadrcConfig
-  local M = {}
+local M = {}
 
 M.base46 = {
   theme = "nord",    -- use NvChad’s default theme
@@ -20,9 +20,13 @@ M.base46 = {
     },
 
     -- don't want the status line
-    statusline = {
-      enabled = false,
-    },
+     statusline = {
+       enabled = true,
+       theme = nil, 
+       separator_style = "default",
+       order = nil,
+       modules = nil,
+     },
   }
 
   --Nv dash

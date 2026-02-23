@@ -23,7 +23,7 @@ vim.o.incsearch = true
 vim.o.undofile = true
 vim.opt.colorcolumn = "80"
 vim.opt.termguicolors = true
-vim.opt.laststatus = 0
+-- vim.opt.statusline = "" -- Remove or comment this out
 
 vim.g.undotree_WindowLayout = 2
 vim.g.undotree_SplitWidth = 30
