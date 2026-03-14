@@ -1,0 +1,4 @@
+set colorscheme default
+set show_hidden false 
+set preview_images true
+set preview_images_method ueberzug
