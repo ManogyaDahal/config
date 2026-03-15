@@ -24,38 +24,43 @@ return {
       },
     },
   },
-{
-  "jiaoshijie/undotree",
-  opts = {
-    -- your options
+  {
+    "jiaoshijie/undotree",
+    opts = {
+      -- your options
+    },
+    keys = { -- load the plugin only when using it's keybinding:
+      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+    },
   },
-  keys = { -- load the plugin only when using it's keybinding:
-    { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+
+  {
+    "fasterius/simple-zoom.nvim",
+    opts = {},
+    config = true,
+    lazy=false,
   },
-},
 
-{
-  "fasterius/simple-zoom.nvim",
-  opts = {},
-  config = true,
-  lazy=false,
-},
-
-{
-  "lukas-reineke/indent-blankline.nvim",
-  enabled = false,
-},
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    enabled = false,
+  },
 
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^8', -- Recommended
+    lazy = false, -- This plugin is already lazy
+  },
 
   {
-  	"nvim-treesitter/nvim-treesitter",
-  	opts = {
-  		ensure_installed = {
-  			"vim", "lua", "vimdoc",
-       "html", "css", "diff", "rust", "go"
-  		},
-  	},
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim", "lua", "vimdoc",
+        "html", "css", "diff", "rust", "go"
+      },
+    },
   },
 }

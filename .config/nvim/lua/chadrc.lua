@@ -22,7 +22,7 @@ M.base46 = {
     -- don't want the status line
      statusline = {
        enabled = true,
-       theme = nil, 
+       theme = nil,
        separator_style = "default",
        order = nil,
        modules = nil,
