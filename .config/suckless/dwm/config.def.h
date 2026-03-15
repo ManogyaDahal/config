@@ -2,7 +2,7 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -14,21 +14,17 @@ static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char dmenufont[] = "Hack Nerd Font:size=10";
 static const char *fonts[] = {"Hack Nerd Font:style:medium:size=10", "Hack Nerd Font:style:medium:size=10", "Symbols Nerd Font:size=9"};
-static const char col_gray1[] = "#222222"; // backgroud colour normally seen
-static const char col_gray2[] = "#E8B082"; // border for unfocused window
-static const char col_gray3[] = "#fff";    // font color ;normal
-static const char col_gray4[] = "#000000"; // font color when focused on a window
-static const char col_cyan[] = "#E8B082";  // border color when the window is focused
-// static const char col_cyan[] = "#83bae8";  // border color when the window is focused
-static const char col_active[] = "#83bae8";
-// static const char col_cyan[] = "#ABE9B3";  // border color when the window is focused
-                                           //this is the default color #83bae8
+static const char col_gray1[] = "#222222"; // normal background
+static const char col_gray2[] = "#444444"; // unfocused border
+static const char col_gray3[] = "#bbbbbb"; // normal text
+static const char col_gray4[] = "#eeeeee"; // selected text
+static const char col_cyan[]  = "#005577"; // focused background & border
 
 static const char *colors[][3] = {
-    /*               fg         bg         border   */
-    [SchemeNorm] = {col_gray3, col_gray1,   col_gray2},
-    [SchemeSel] =  {col_gray4, col_cyan,    col_active},
-    [SchemeHid] =  {col_cyan,  col_gray1,   col_cyan},
+       /*               fg         bg         border   */
+       [SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+       [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+       [SchemeHid]  = { col_cyan,  col_gray1, col_cyan  }, // optional, for hidden tag patch
 };
 
 /* tagging */
@@ -96,7 +92,7 @@ static const Key keys[] = {
   {0,           F3,               spawn, SHCMD("~/.local/bin/volumenotifier.sh up")},
   {0,           F2,               spawn, SHCMD("~/.local/bin/volumenotifier.sh down")},
   {0,           F1,               spawn, SHCMD("~/.local/bin/volumenotifier.sh mute")},
-  {0,           F9,               spawn, SHCMD("betterlockscreen -l blur")}, //to lock screen
+  {0,           F9,               spawn, SHCMD("~/.local/bin/nightlight-toggle.sh")}, //toggle night light
   {0,           printsc,          spawn, SHCMD("flameshot gui")}, //to take screenshot
   {0,           F6,               spawn, SHCMD("~/.local/bin/brightness.sh up")},
   {0,           F5,               spawn, SHCMD("~/.local/bin/brightness.sh down")},
@@ -107,7 +103,7 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_i,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_B,      togglebar,      {0} },
+	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_k,      focusstackvis,  {.i = +1 } },
 	{ MODKEY,                       XK_j,      focusstackvis,  {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_k,      focusstackhid,  {.i = +1 } },

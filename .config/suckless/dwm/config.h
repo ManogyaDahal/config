@@ -92,12 +92,11 @@ static const Key keys[] = {
   {0,           F3,               spawn, SHCMD("~/.local/bin/volumenotifier.sh up")},
   {0,           F2,               spawn, SHCMD("~/.local/bin/volumenotifier.sh down")},
   {0,           F1,               spawn, SHCMD("~/.local/bin/volumenotifier.sh mute")},
-  {0,           F9,               spawn, SHCMD("betterlockscreen -l blur")}, //to lock screen
+  {0,           F9,               spawn, SHCMD("~/.local/bin/nightlight-toggle.sh")}, //toggle night light
   {0,           printsc,          spawn, SHCMD("flameshot gui")}, //to take screenshot
   {0,           F6,               spawn, SHCMD("~/.local/bin/brightness.sh up")},
   {0,           F5,               spawn, SHCMD("~/.local/bin/brightness.sh down")},
-  // {0,           F4,               spawn, SHCMD("alacritty -e ranger ~/School")},
-  {0,           F4,               spawn, SHCMD("~/.local/bin/showDate")},
+  {0,           F4,               spawn, SHCMD("alacritty -e ranger ~/School")},
   {MODKEY,      XK_p,             spawn, SHCMD("firefox --private-window --new-tab")},//new tab for private window
   // custom keybindings start {end}
 
