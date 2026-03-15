@@ -1,0 +1,14 @@
+#!/bin/bash
+
+DMENU='dmenu -i -fn Iosevka:size=18 -nb #222222 -nf #ffffff -sb #83bae8 -sf #000000'
+
+choice=$(echo -e "poweroff\nsuspend\nlogout\nreboot\nhibernate" | $DMENU)
+
+# Handle choices
+case "$choice" in
+  suspend) systemctl suspend & ;;
+  poweroff) systemctl poweroff;;
+  logout) loginctl terminate-user $USER & ;;
+  reboot) systemctl reboot & ;;
+  hibernate) systemctl hibernate & ;;
+esac

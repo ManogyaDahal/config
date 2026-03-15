@@ -1,0 +1,1 @@
+bin/nightlight-toggle.sh
