@@ -98,6 +98,7 @@ static const Key keys[] = {
   {0,           F5,               spawn, SHCMD("~/.local/bin/brightness.sh down")},
   {0,           F4,               spawn, SHCMD("alacritty -e ranger ~/School")},
   {MODKEY,      XK_p,             spawn, SHCMD("firefox --private-window --new-tab")},//new tab for private window
+  {MODKEY|ShiftMask,      XK_g,      spawn, SHCMD("~/.local/bin/fix_keyboard")}, //fix mappings
   // custom keybindings start {end}
 
 	/* modifier                     key        function        argument */

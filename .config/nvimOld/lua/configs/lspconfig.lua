@@ -4,7 +4,8 @@ local servers = {
   "html",
   "cssls",
   "rust_analyzer",
-  "gopls"
+  "gopls",
+  "pylsp"
 }
   vim.lsp.enable(servers)
 
