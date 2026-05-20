@@ -1,1 +1,0 @@
-bin/volumenotifier.sh
