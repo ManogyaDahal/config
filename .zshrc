@@ -114,7 +114,7 @@ eval "$(zoxide init --cmd cd zsh)"
  alias l.="eza -a | grep -e '^\.'"          
  alias sleep='systemctl suspend'
  bindkey -s ^p "~/.local/bin/tmux-sessionizer.sh\n"
- alias nvim='~/.local/share/bob/nvim-bin/nvim'
+# alias nvim='~/.local/share/bob/nvim-bin/nvim'
 alias ignoreit="curl -fsSL https://raw.githubusercontent.com/razzat008/ignoreit/refs/heads/master/useit.sh | sh -s -- "
 
 # # pnpm
@@ -124,11 +124,6 @@ alias ignoreit="curl -fsSL https://raw.githubusercontent.com/razzat008/ignoreit/
 #   *) export PATH="$PNPM_HOME:$PATH" ;;
 # esac
 # pnpm end
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH=$HOME/.local/bin:$PATH
 
 # opencode
 export PATH=/home/manogya/.opencode/bin:$PATH
