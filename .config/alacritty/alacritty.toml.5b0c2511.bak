@@ -7,7 +7,7 @@ WINIT_X11_SCALE_FACTOR = "1.5"
 dynamic_padding = true
 decorations = "full"
 title = "Alacritty@Arch"
-opacity = 0.92
+opacity = 0.9 
 decorations_theme_variant = "Dark"
 
 [window.dimensions]
@@ -163,8 +163,3 @@ action = "ResetFontSize"
 [general]
 live_config_reload = true
 working_directory = "None"
-
-[[keyboard.bindings]]
-key = "Return"
-mods = "Shift"
-chars = "\u001B\r"

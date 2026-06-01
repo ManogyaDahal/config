@@ -10,7 +10,7 @@ static const unsigned int systrayonleft = 0;    /* 0: systray in the right corne
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;        /* 0 means no systray */
-static const int showbar            = 0;        /* 0 means no bar */
+static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char dmenufont[] = "Hack Nerd Font:size=10";
 static const char *fonts[] = {"Hack Nerd Font:style:medium:size=10", "Hack Nerd Font:style:medium:size=10", "Symbols Nerd Font:size=9"};
@@ -98,7 +98,6 @@ static const Key keys[] = {
   {0,           F5,               spawn, SHCMD("~/.local/bin/brightness.sh down")},
   {0,           F4,               spawn, SHCMD("alacritty -e ranger ~/School")},
   {MODKEY,      XK_p,             spawn, SHCMD("firefox --private-window --new-tab")},//new tab for private window
-  {MODKEY|ShiftMask,      XK_g,      spawn, SHCMD("~/.local/bin/fix_keyboard")}, //fix mappings
   // custom keybindings start {end}
 
 	/* modifier                     key        function        argument */
