@@ -27,6 +27,7 @@ require("plugins.actions_preview")
 require("plugins.autopairs")
 require("plugins.surround")
 require("plugins.typst-preview")
+require("plugins.scrollEOF")
 
 require("plugins.gitsigns")
 require("plugins.comment")

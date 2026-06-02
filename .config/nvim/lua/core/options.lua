@@ -9,15 +9,14 @@ g.luasnippets_path = { vim.fn.stdpath("config") .. "/lua/custom/snippets" }
 
 opt.number = true
 opt.relativenumber = true
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.shiftwidth = 4
+opt.tabstop = 2
+opt.shiftwidth = 2
 opt.expandtab = true
 opt.wrap = false
 opt.clipboard = "unnamedplus"
 opt.iskeyword:append({ "-", "_" })
 opt.isfname:append("@-@")
-opt.scrolloff = 5
+opt.scrolloff = 8
 opt.colorcolumn = "80"
 opt.hlsearch = false
 opt.incsearch = true

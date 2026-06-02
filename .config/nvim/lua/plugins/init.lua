@@ -35,4 +35,6 @@ vim.pack.add({
 
   -- typst preview
   "https://github.com/chomosuke/typst-preview.nvim",
+  -- scrolloffset
+  "https://github.com/Aasim-A/scrollEOF.nvim",
 })
