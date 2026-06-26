@@ -12,7 +12,8 @@ local servers = {
   "gopls",
   "jdtls",
   "yamlls",
-  "tailwindcss",
+  "tailwindcss-language-server",
+  "tinymist",
   "asm_lsp",
 }
 

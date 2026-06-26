@@ -94,8 +94,6 @@ map("n", "<C-l>", "<C-w>l", { desc = "Shift focus to right window" })
 map("n", "<C-j>", "<C-w>j", { desc = "Shift focus to bottom window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Shift focus to top window" })
 
-map("n", ";", ":", { desc = "Enter command mode", nowait = true })
-
 map("n", "<leader>sv", "<C-w>v",          { desc = "Split window vertically" })
 map("n", "<leader>cx", "<cmd>!chmod +x %<cr>", { desc = "Make current file executable", silent = true })
 
@@ -113,10 +111,10 @@ map("i", "<S-Tab>", function()
 end, { expr = true, noremap = true, silent = true })
 
 -- ─── Clipboard / paste ───────────────────────────────────────────────────────
-
 map("n", "<leader>y", [["+y]],  { desc = "Yank to system clipboard" })
 map("v", "<leader>y", [["+y]],  { desc = "Yank to system clipboard (visual)" })
-map("x", "<leader>p", [["_dP]], { desc = "Paste over without losing clipboard" })
+map("n", "<leader>d", [["_d]], { desc = "Delete without yanking" })
+map("x", "<leader>y", [["_dP]], { desc = "Paste over without losing clipboard" })
 
 -- ─── Comments ────────────────────────────────────────────────────────────────
 
