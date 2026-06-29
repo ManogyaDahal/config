@@ -1,14 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-DMENU='dmenu -i -fn Iosevka:size=18 -nb #222222 -nf #ffffff -sb #83bae8 -sf #000000'
+# 1. Pipe options into rofi in dmenu mode
+choice=$(echo -e "poweroff\nsuspend\nlogout\nreboot\nhibernate" | rofi -dmenu -i -p "Action:")
 
-choice=$(echo -e "poweroff\nsuspend\nlogout\nreboot\nhibernate" | $DMENU)
-
-# Handle choices
+# 2. Run the command based on what you clicked
 case "$choice" in
-  suspend) systemctl suspend & ;;
-  poweroff) systemctl poweroff;;
-  logout) loginctl terminate-user $USER & ;;
-  reboot) systemctl reboot & ;;
-  hibernate) systemctl hibernate & ;;
+    poweroff) systemctl poweroff ;;
+    reboot) systemctl reboot ;;
+    suspend) systemctl suspend ;;
+    hibernate) systemctl hibernate ;;
+    logout) loginctl terminate-user "$USER" ;; 
 esac

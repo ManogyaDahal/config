@@ -40,11 +40,11 @@ fi
 #bash ~/.scripts/bash_scripts/e.sh &
 
 #for wallpaper
-if [[ $(pidof nitrogen) ]]; then
- echo "nitrogen is running"
+if [[ $(pidof feh) ]]; then
+ echo "feh is running"
 else
  echo "starting"
- exec nitrogen --restore --set-scaled &
+ exec ~/.fehbg &
 fi
 
 picom_config=$HOME/.config/picom/picom.conf
@@ -90,4 +90,8 @@ kdeconnect-indicator &
 #dynamic window manager-by suckless
 #to update dwm without closing the running apps
 #
-while type dwm >/dev/null; do dwm && continue || break; done
+while true; do
+    dwm
+    echo "dwm exited, restarting..." 
+    sleep 1
+done   
