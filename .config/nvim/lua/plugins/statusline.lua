@@ -28,7 +28,7 @@ local function lsp_clients()
   return " " .. table.concat(names, ",")
 end
 
-local custom_theme = require('lualine.themes.vague') -- Replace 'auto' with your theme name
+local custom_theme = require('lualine.themes.auto') -- Replace 'auto' with your theme name
 local normal_bg = custom_theme.normal.a.bg
 local normal_fg = custom_theme.normal.a.fg
 custom_theme.insert.a = { bg = normal_bg, fg = normal_fg }
