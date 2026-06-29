@@ -12,19 +12,23 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char dmenufont[] = "Hack Nerd Font:size=10";
-static const char *fonts[] = {"Hack Nerd Font:style:medium:size=10", "Hack Nerd Font:style:medium:size=10", "Symbols Nerd Font:size=9"};
-static const char col_gray1[] = "#222222"; // normal background
-static const char col_gray2[] = "#444444"; // unfocused border
-static const char col_gray3[] = "#bbbbbb"; // normal text
-static const char col_gray4[] = "#eeeeee"; // selected text
-static const char col_cyan[]  = "#005577"; // focused background & border
+static const char dmenufont[] = "Hack Nerd Font:size=12";
+static const char *fonts[] = {"Hack Nerd Font:style:medium:size=12", "Hack Nerd Font:style:medium:size=12", "Symbols Nerd Font:size=12"};
+static const char col_gray1[] = "#222222"; // backgroud colour normally seen
+static const char col_gray2[] = "#E8B082"; // border for unfocused window
+static const char col_gray3[] = "#fff";    // font color ;normal
+static const char col_gray4[] = "#000000"; // font color when focused on a window
+// static const char col_cyan[] = "#E8B082";  // border color when the window is focused
+// static const char col_cyan[] = "#83bae8";  // border color when the window is focused
+static const char col_active[] = "#83bae8";
+static const char col_cyan[] = "#ABE9B3";  // border color when the window is focused
+                                           //this is the default color #83bae8
 
 static const char *colors[][3] = {
-       /*               fg         bg         border   */
-       [SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-       [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-       [SchemeHid]  = { col_cyan,  col_gray1, col_cyan  }, // optional, for hidden tag patch
+    /*               fg         bg         border   */
+    [SchemeNorm] = {col_gray3, col_gray1,   col_gray2},
+    [SchemeSel] =  {col_gray4, col_cyan,    col_active},
+    [SchemeHid] =  {col_cyan,  col_gray1,   col_cyan},
 };
 
 /* tagging */
