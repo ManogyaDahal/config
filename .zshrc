@@ -129,3 +129,5 @@ alias ignoreit="curl -fsSL https://raw.githubusercontent.com/razzat008/ignoreit/
 export PATH=/home/manogya/.opencode/bin:$PATH
 export PATH="$PATH:$HOME/flutter/bin"
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+alias fm=ranger

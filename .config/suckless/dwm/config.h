@@ -100,7 +100,7 @@ static const Key keys[] = {
   {0,           printsc,          spawn, SHCMD("flameshot gui")}, //to take screenshot
   {0,           F6,               spawn, SHCMD("~/.local/bin/brightness.sh up")},
   {0,           F5,               spawn, SHCMD("~/.local/bin/brightness.sh down")},
-  {0,           F4,               spawn, SHCMD("alacritty -e ranger ~/School")},
+  {0,           F4,               spawn, SHCMD("alacritty -e ranger ~/Documents/School")},
   {MODKEY,      XK_p,             spawn, SHCMD("firefox --private-window --new-tab")},//new tab for private window
   // custom keybindings start {end}
 
