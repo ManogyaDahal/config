@@ -1,0 +1,14 @@
+set selection-clipboard clipboard
+map = zoom in
+map + adjust_window best-fit
+map u scroll half-up 
+# Enable recoloring (dark mode)
+set recolor "true"
+
+# Define colors (Example: Dark Gray background, light grey foreground)
+# You can change these hex codes to your preference
+set recolor-lightcolor "#FDF6E3" # Background
+set recolor-darkcolor "black"  # Text
+
+# Optional: Keep the original colors of images
+set recolor-keephue "true"
