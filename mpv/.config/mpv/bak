@@ -1,0 +1,6 @@
+sub-clear-on-seek
+slang=en,eng,enUS,en-US
+sub-auto=fuzzy
+ytdl-raw-options=ignore-config=,sub-lang="en,eng,enUS,en-US",write-sub=,write-auto-sub=,yes-playlist=,
+ytdl-format=bestvideo[height<=?1080]+bestaudio/best
+
