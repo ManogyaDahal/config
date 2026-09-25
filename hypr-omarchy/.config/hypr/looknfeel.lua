@@ -41,6 +41,14 @@ hl.config({
 --   },
 -- })
 
+-- When a fullscreen/maximized window closes, hand its state to the next
+-- focused window instead of reverting the workspace to tiling.
+hl.config({
+  misc = {
+    exit_window_retains_fullscreen = true,
+  },
+})
+
 -- https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/
 -- hl.config({
 --   scrolling = {

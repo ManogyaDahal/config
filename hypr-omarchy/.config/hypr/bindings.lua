@@ -74,7 +74,7 @@ o.bind("SUPER + B", "toggle bar for omarchy", "omarchy toggle bar")
 -- Window behaviour (close / master-swap / mfact)
 -- ===================================================================
 hl.bind("SUPER + SHIFT + RETURN", hl.dsp.layout("swapwithmaster master"), { description = "Swap Master" })
-hl.bind("SUPER + Q", hl.dsp.window.close(), { description = "Close Window" })
+hl.bind("SUPER + Q", hl.dsp.window.close(), { repeating = true , description = "Close Window" })
 hl.bind("SUPER + H", hl.dsp.layout("mfact -0.05"), { repeating = true, description = "Decrease mfact" }) -- (default super + -)
 hl.bind("SUPER + L", hl.dsp.layout("mfact +0.05"), { repeating = true, description = "Increase mfact" }) -- (default super + =)
 
@@ -84,8 +84,8 @@ hl.bind("SUPER + L", hl.dsp.layout("mfact +0.05"), { repeating = true, descripti
 -- ===================================================================
 -- Navigation (focus / workspace cycling)
 -- ===================================================================
-hl.bind("SUPER + J", hl.dsp.layout("cyclenext"), { description = "Focus next in stack" })
-hl.bind("SUPER + K", hl.dsp.layout("cycleprev"), { description = "Focus previous in stack" })
+hl.bind("SUPER + J", hl.dsp.layout("cyclenext"), { repeating= true , description = "Focus next in stack" })
+hl.bind("SUPER + K", hl.dsp.layout("cycleprev"), { repeating= true, description = "Focus previous in stack" })
 o.bind("SUPER + TAB", "Cycle recent workspace", hl.dsp.focus({ workspace = "previous" }))
 
 -- ===================================================================
